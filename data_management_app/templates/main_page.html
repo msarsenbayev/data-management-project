@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+    body { 
+      width: 100%; 
+
+    }
+
+    header {
+    background-color: #F0F0F0;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    }
+
+    /* Style the counter cards */
+    .card card-block mx-3 bg-light mb-8 {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+      padding: 16px;
+      text-align: center;
+      background-color: #f1f1f1;
+    }
+
+
+    #navbar1 {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+    }
+
+
+</style>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+
+<head>
+    <title>Valve Management System</title>
+    <header>
+      <h1>Valve Management</h1>
+  </header>
+
+  <div class="navbar-nav navbar-light bg-light" id="navbar1">
+      <div class="navbar-nav ms-auto">
+        <a class="nav-item nav-link active pull-right" href="{% url "handle_logout" %}">Log out</a>
+      </div>
+  </div>
+</head>
+
+<body>
+    
+
+      &nbsp;
+      <div class="d-flex flex-row flex-nowrap overflow-auto">
+
+            <div class="card card-block mx-3 bg-light mb-8" style="width: 18rem;">
+              <div class="card-header">Valve Database</div>
+                <div class="card-body">
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="valve_database.html" class="btn btn-primary">Add</a> <a href="all_valve_info.html" class="btn btn-primary">View</a>
+                </div>
+            </div>
+
+            <div class="card card-block mx-3 bg-light mb-8" style="width: 18rem;">
+              <div class="card-header">Valve Testing</div>
+                <div class="card-body">
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="valve_testing.html" class="btn btn-primary">Add</a> <a href="submitted_valvetesting.html" class="btn btn-primary">View</a>
+                </div>
+          </div>
+
+            <div class="card card-block mx-3 bg-light mb-8" style="width: 18rem;">
+              <div class="card-header">Valve Inspection</div>
+                <div class="card-body">
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="valve_inspection.html" class="btn btn-primary">Add</a> <a href="submitted_valveinspection.html" class="btn btn-primary">View</a>
+                </div>
+            </div>
+
+            <div class="card card-block mx-3 bg-light mb-8" style="width: 18rem;">
+                <div class="card-header">Valve Preservation</div>
+                  <div class="card-body">
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="valve_preservation.html" class="btn btn-primary">Add</a> <a href="submitted_valvepreservation.html" class="btn btn-primary">View</a>
+                  </div>
+            </div>
+
+      </div>
+
+        &nbsp;
+        
+      <div class="d-flex flex-row flex-nowrap overflow-auto">
+
+        <div class="card card-block mx-3 bg-light mb-8" style="width: 18rem;">
+          <div class="card-header">Valve Receipt</div>
+            <div class="card-body">
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="valvereceipt_form.html" class="btn btn-primary">Add</a> <a href="submitted_valvereceipt.html" class="btn btn-primary">View</a>
+            </div>
+        </div>
+
+        <div class="card card-block mx-3 bg-light mb-8" style="width: 18rem;">
+          <div class="card-header">Valve Dispatch</div>
+            <div class="card-body">
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="valvedispatch_form.html" class="btn btn-primary">Add</a> <a href="submitted_valvedispatch.html" class="btn btn-primary">View</a>
+            </div>
+        </div>
+
+        <div class="card card-block mx-3 bg-light mb-8" style="width: 18rem;">
+          <div class="card-header">Dashboard</div>
+            <div class="card-body">
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="dashboard.html" class="btn btn-primary">View</a>
+            </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+</body>
+</html>

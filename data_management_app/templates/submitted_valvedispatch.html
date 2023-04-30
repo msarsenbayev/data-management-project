@@ -1,0 +1,70 @@
+
+{% block content %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+
+  <head>
+    <header>
+      <h1>Valve Dispatch</h1>
+    </header>
+    {% include 'navbar.html' %}
+  </head>
+   
+  {% include 'messages.html' %}
+
+    <br>
+
+<body>
+
+
+<div id = "div1">
+
+</div>
+
+<p></p>
+
+</body>
+
+<div id = "div2">
+  {% load render_table from django_tables2 %}
+  {% render_table table %}
+</div>
+
+
+
+<style>
+
+#div1{
+
+    background-color:bg-light;
+    border-radius: 15px;
+}
+
+body { width: 1400px; margin: 0 auto; 
+  font-size:90%;
+}
+
+
+          /* Add some styles to the header */
+          header {
+    background-color: #F0F0F0;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+</style>
+
+
+</html>
+{% endblock content %}
+
+
+
+
+

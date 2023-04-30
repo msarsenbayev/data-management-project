@@ -1,0 +1,402 @@
+{% block content %}
+{% load widget_tweaks %}
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+
+  <HEader>
+ <h1>Dashboard</h1>
+  </HEader>
+  
+  <div class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-nav ms-auto">
+      <a class="nav-item nav-link active pull-right" href="{% url "handle_logout" %}">Log out</a>
+    </div>
+  </div>
+
+</head> 
+
+
+<body>
+  
+
+<h2></h2>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+<div>
+
+  <div id="root">
+    <div class="container pt-5">
+      <div class="row align-items-stretch">
+        <div class="c-dashboardInfo col-lg-3 col-md-6">
+          <div class="wrap">
+            <h3 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">TOTAL VALVES<svg
+                class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
+                </path>
+              </svg></h3><span class="hind-font caption-12 c-dashboardInfo__count">{{total_valves}}</span><span
+              class="hind-font caption-12 c-dashboardInfo__subInfo" style="color: #003366;">{{total_soft}} SOFT</span> <span
+              class="hind-font caption-12 c-dashboardInfo__subInfo" style="color: #d1495b;">{{total_metal}} METAL</span>
+          </div>
+        </div>
+        <div class="c-dashboardInfo col-lg-3 col-md-6">
+          <div class="wrap">
+            <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">SEAT TESTS<svg
+                class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
+                </path>
+              </svg></h4><span class="hind-font caption-12 c-dashboardInfo__count">{{seat_tests}}</span><span
+              class="hind-font caption-12 c-dashboardInfo__subInfo" style="color: #003366;">{{seattest_pass}} PASS</span> <span
+              class="hind-font caption-12 c-dashboardInfo__subInfo" style="color: #d1495b;">{{seattest_fail}} FAIL</span>
+          </div>
+        </div>
+        <div class="c-dashboardInfo col-lg-3 col-md-6">
+          <div class="wrap">
+            <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">SHELL TESTS<svg
+                class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
+                </path>
+              </svg></h4><span class="hind-font caption-12 c-dashboardInfo__count">{{shell_tests}}</span><span
+              class="hind-font caption-12 c-dashboardInfo__subInfo" style="color: #003366;">{{shelltest_pass}} PASS</span> <span
+              class="hind-font caption-12 c-dashboardInfo__subInfo" style="color: #d1495b;">{{shelltest_fail}} FAIL</span>
+
+          </div>
+        </div>
+        <div class="c-dashboardInfo col-lg-3 col-md-6">
+          <div class="wrap">
+            <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">BACKSEAT TESTS<svg
+                class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
+                </path>
+              </svg></h4><span class="hind-font caption-12 c-dashboardInfo__count">{{backseat_tests}}</span>
+              <span
+              class="hind-font caption-12 c-dashboardInfo__subInfo" style="color: #003366;">{{backseat_pass}} PASS</span> <span
+              class="hind-font caption-12 c-dashboardInfo__subInfo" style="color: #d1495b;">{{backseat_fail}} FAIL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row mt-2">
+
+      <div class="card" id = "div1">
+        <canvas id="doughnut_chart" aria-label="chart" width="400" height="300">></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+        <script>
+          var chrt = document.getElementById("doughnut_chart").getContext("2d");
+          var doughnut_chart = new Chart(chrt, {
+              type: 'doughnut',
+              data: {
+                labels: [{% for man_label in man_labels %}  '{{ man_label }}',  {% endfor %}],
+                datasets: [{
+                label: "online tutorial subjects",
+                data: [{% for man_data in man_dataset %}  '{{ man_data }}',  {% endfor %}],
+                backgroundColor: ['#003366', '#417690', '#1E2B3A', '#388E3C', '#9E9E9E', 'lightblue'],
+                hoverOffset: 5
+                }],
+              },
+              options: {
+                responsive: false,
+              },
+          });
+        </script>
+
+
+      </div>
+
+  <div class="card" id = "div2">
+
+    <canvas id="hor-bar-chart" width="100" height="70"></canvas>
+    <script>
+      var ctx0 = document.getElementById("hor-bar-chart").getContext('2d');
+      var myHorBarChart = new Chart(ctx0, {
+          type: 'bar',
+          data: {
+              labels: [{% for man_label in man_labels %}  '{{ man_label }}',  {% endfor %}],
+              datasets: [{
+                  label: "VALVE MANUFACTURER",
+                  backgroundColor: ["#417690"
+                  ],
+                  data: [{% for man_data in man_dataset %}  '{{ man_data }}',  {% endfor %}],
+              }]
+          },
+          options: {
+              indexAxis: 'y',
+              title: {
+                  display: true,
+                  text: 'Chart JS Horizontal Bar Chart Example'
+              }
+          }
+      });
+    </script>
+  </div>
+  
+  <div class="card" id = "div3">
+    <canvas id="bar-chart" width="100" height="70"></canvas>
+        <script>
+        var ctx = document.getElementById('bar-chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [{% for type_label in type_labels %}  '{{ type_label }}',  {% endfor %}],
+                datasets: [{
+                    label: 'VALVE TYPE',
+                    data: [{% for type_data in type_dataset %}  '{{ type_data }}',  {% endfor %}],
+                    backgroundColor: [
+                      "#417690"
+                    ],
+                    borderColor: [
+                    "#417690"
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+  </div>
+
+</div>
+
+<br>
+
+<div class="row mt-2">
+
+  <div class="card" id = "div4">
+    <canvas id="seattype" width="100" height="50"></canvas>
+    <script>
+      var ctx = document.getElementById("seattype").getContext("2d");
+      var seattype = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: [{% for man_label in man_labels %}  '{{ man_label }}',  {% endfor %}],
+          datasets: [
+            {
+              label: "METAL SEAT",
+              data: [{% for metal in omb_metal_dataset %}  '{{ metal }}',  {% endfor %} 
+              {% for perar_metal in perar_metal_dataset %}  '{{ perar_metal }}',  {% endfor %} {% for goodwin_metal in goodwin_metal_dataset %}  '{{ goodwin_metal }}',  {% endfor %}
+              {{ galperti_metal_dataset }}],
+              backgroundColor: "#d1495b",
+              borderColor: "#d1495b",
+              borderWidth: 1,
+            },
+            {
+              label: "SOFT SEAT",
+              data: [{% for soft in omb_soft_dataset %}  '{{ soft }}',  {% endfor %} 
+              {% for perar_soft in perar_soft_dataset %}  '{{ perar_soft }}',  {% endfor %} 
+              {% for goodwin_soft in goodwin_soft_dataset %}  '{{ goodwin_soft }}',  {% endfor %}
+              {{ galperti_soft_dataset }}],
+              backgroundColor: "#417690",
+              borderColor: "#417690",
+              borderWidth: 1,
+            },
+
+          ],
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+    </script>
+  </div>
+
+
+  <div class="card" id = "div5">
+    <canvas id="myChart" width="100" height="50"></canvas>
+    <script>
+      var ctx = document.getElementById("myChart").getContext("2d");
+      var myChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: [{% for size_label in size_labels %}  '{{ size_label }}',  {% endfor %}],
+          datasets: [
+            {
+              label: "VALVE SIZE",
+              data: [{% for size_data in size_dataset %}  '{{ size_data }}',  {% endfor %}],
+              backgroundColor: "#d1495b",
+              borderColor: "#d1495b",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+    </script>
+  </div>
+  
+  
+</div>
+
+<br>
+
+</body>
+</html>
+
+
+
+<style>
+  .dashboard-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  #div1 {
+    width: 33%;
+    float: left;
+    border-radius: 7px;
+    box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  #div2 {
+    width: 33%;
+    margin: 0 auto;    
+    float: left;
+    border-radius: 7px;
+    box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  #div3 {
+    width: 33%;
+    float: left;
+    border-radius: 7px;
+    box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  #div4 {
+    width: 49.2%;
+    margin: 5px;
+    border-radius: 7px;
+    box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  #div5 {
+    width: 49.2%;
+    margin: 5px;
+    border-radius: 7px;
+    box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+
+  body { width: 1400px; margin: 0 auto; 
+      font-size:90%;
+    }
+
+    header {
+    background-color: #F0F0F0;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    }
+
+
+
+
+
+    .c-dashboardInfo {
+  margin-bottom: 15px;
+}
+.c-dashboardInfo .wrap {
+  background: #ffffff;
+  box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px 10px 10px;
+  height: 100%;
+  width: 300px;
+}
+.c-dashboardInfo__title,
+.c-dashboardInfo__subInfo {
+  color: #6c6c6c;
+  font-size: 1.18em;
+}
+.c-dashboardInfo span {
+  display: block;
+}
+.c-dashboardInfo__count {
+  font-weight: 600;
+  font-size: 2.5em;
+  line-height: 64px;
+  color: #323c43;
+}
+.c-dashboardInfo .wrap:after {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 7px;
+  content: "";
+}
+
+.c-dashboardInfo:nth-child(1) .wrap:after {
+  background: linear-gradient(82.59deg, #00c48c 0%, #00a173 100%);
+}
+.c-dashboardInfo:nth-child(2) .wrap:after {
+  background: linear-gradient(81.67deg, #0084f4 0%, #1a4da2 100%);
+}
+.c-dashboardInfo:nth-child(3) .wrap:after {
+  background: linear-gradient(69.83deg, #0084f4 0%, #00c48c 100%);
+}
+.c-dashboardInfo:nth-child(4) .wrap:after {
+  background: linear-gradient(81.67deg, #ff647c 0%, #1f5dc5 100%);
+}
+.c-dashboardInfo__title svg {
+  color: white;
+  margin-left: -2px;
+}
+.MuiSvgIcon-root-19 {
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  font-size: 24px;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+
+</style>
+
+
+{% endblock %}

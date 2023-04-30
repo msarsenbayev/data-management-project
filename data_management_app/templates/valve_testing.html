@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+    <style>
+
+      
+
+          /* Add some styles to the header */
+          header {
+    background-color: #F0F0F0;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+
+        * {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 30px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card card-block mx-3 bg-light mb-8 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+
+    </style>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+<head>
+    <header>
+      <h1>Valve Testing</h1>
+      <th>Valve Testing Information</th>
+    </header>
+  </head>
+  {% include 'navbar.html' %}
+
+  <body>
+
+    {% include 'messages.html' %}
+
+        <p>
+
+    <div class="d-flex flex-row flex-nowrap overflow-auto">
+        <!-- First row for Valve Database entry -->
+        <div class="card card-block mx-3 bg-light mb-8" style="max-width: 18rem;" id = "div1">
+            <div class="card-header">Seat Test</div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a class="btn btn-primary"  role="button" href="seattest_form.html">Add</a> <a href="submitted_seattesting.html" class="btn btn-primary">View</a>
+            </div>
+        </div>
+
+        <div class="card card-block mx-3 bg-light mb-8" style="max-width: 18rem;" id = "div2">
+            <div class="card-header">Shell Test</div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a class="btn btn-primary"  role="button" href="shelltest_form.html">Add</a> <a href="submitted_shelltesting.html" class="btn btn-primary">View</a>
+            </div>
+        </div>
+
+        <div class="card card-block mx-3 bg-light mb-8" style="max-width: 18rem;" id = "div3">
+            <div class="card-header">BackSeat Test</div>
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a class="btn btn-primary" href="backseattest_form.html" role="button">Add</a> <a href="submitted_backseattesting.html" class="btn btn-primary">View</a>
+            </div>
+        </div>
+
+
+    </div>    
+</body>
+</html>

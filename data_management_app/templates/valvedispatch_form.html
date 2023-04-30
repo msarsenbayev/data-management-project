@@ -1,0 +1,109 @@
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+        Form {
+    display: inline-block;
+    width: 45%;
+    padding: 20px;
+    text-align: left;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 0 auto;
+    vertical-align: top;  // Align children to middle of line
+
+  }
+
+
+      .form-header {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      
+    
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: normal;
+      }
+    
+      input[type="text"],
+      select,
+      input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+    
+      input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+            /* Add a background color to the submit button on mouse-over */
+      input[type=submit]:hover {
+        background-color: #45a049;
+      }
+    
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+    
+      .radio-group {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+      }
+    
+      input[type="radio"] {
+        margin-right: 10px;
+      }
+
+                  /* Add some styles to the header */
+                  header {
+            background-color: #F0F0F0;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+    </style>
+  </head>
+ 
+  <body>
+    <header>
+      <h1>Valve Dispatch</h1>
+    </header>
+        <p>        </p>
+        <div>
+          <div>
+            {% for message in messages %}
+            <p class="text-danger">{{message}}</p>
+            {% endfor %}
+          </div>
+        </div>
+
+        <form action="{% url 'submit_valvedispatch' %}" method=POST enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+    
+          <input type="submit" value="Submit" class="btn btn-secondary">
+    
+        </form>
+
+    
+  </body>
+</html>
+{% endblock %}

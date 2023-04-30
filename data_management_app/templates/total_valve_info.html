@@ -1,0 +1,240 @@
+<html>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+
+<head>
+    <header>
+      <h1>Valve Testing Information</h1>
+    </header>
+    {% include 'navbar.html' %}
+  
+</head>
+
+
+{% block content %}
+<body>
+    <br>
+
+    <div class="card" id="div0">
+        <div class="card-header">
+            <h4>{{ view_valvedetails.valve_manufacturer }} {{ view_valvedetails.valve_size_in }} X {{ view_valvedetails.valve_rating }},    {{ view_valvedetails.valve_serial_number }}</h4>
+            <h4></h4>
+        </div>
+        <div class="card-body">
+        <h4 class="card-title"></h4>
+        <p class="card-text">
+        <table>
+            <tr>
+              <th>ID:</th>
+              <th>Serial Number:</th>
+              <th>Size In:</th>
+              <th>Size Dn:</th>
+              <th>Rating:</th>
+              <th>Manufacturer:</th>
+              <th>Item Code:</th>
+              <th>Valve Type:</th>
+              <th>Seat Type:</th>
+              <th>End Connection:</th>
+              <th>Operator:</th>
+              <th>Bore Type:</th>
+              <th>Seat Material:</th>
+              <th>Body Material:</th>
+              <th>Obturator Material:</th>
+              <th>Stem Material:</th>
+            </tr>
+            <tr>
+            <td>{{ view_valvedetails.valvedetails_id }}</td>
+              <td>{{ view_valvedetails.valve_serial_number }}</td>
+              <td>{{ view_valvedetails.valve_size_in }}</td>
+              <td>{{ view_valvedetails.valve_size_dn }}</td> 
+              <td>{{ view_valvedetails.valve_rating }}</td>    
+              <td>{{ view_valvedetails.valve_manufacturer }}</td>     
+              <td>{{ view_valvedetails.valve_item_code }}</td>       
+              <td>{{ view_valvedetails.valve_type }}</td>
+              <td>{{ view_valvedetails.valve_seat_type }}</td>
+              <td>{{ view_valvedetails.valve_end_connection }}</td>
+              <td>{{ view_valvedetails.valve_operator }}</td>
+              <td>{{ view_valvedetails.valve_bore_type }}</td>
+              <td>{{ view_valvedetails.valve_seat_material }}</td>
+              <td>{{ view_valvedetails.valve_body_material }}</td>
+              <td>{{ view_valvedetails.valve_obturator_material }}</td>
+              <td>{{ view_valvedetails.valve_stem_material }}</td>
+            </tr>
+          </table>
+    </div>
+    </div>
+
+
+<div >  
+    <div class="card" id="div1">
+        <div class="card-header">
+            <h4> Seat Tests </h4>
+        </div>
+        <div class="card-body">
+            Final Result always on top
+            {% for seattest in seattests %}
+            <h4 class="card-title">{{ seattest.test_date }}: {{ seattest.test_result }}</h4>
+            <p class="card-text">        
+            <li>ID: {{ seattest.seattest_id }}</li>
+            <li>Serial Number: {{ seattest.serial_number }}</li>
+            <li>Test Medium: {{ seattest.test_medium }}</li>
+            <li>Test Pressure: {{ seattest.test_pressure }}</li>
+            <li>Test Duration (Min): {{ seattest.test_duration }}</li>
+            <li>Gauge SN: {{ seattest.gauge_serial_number }}</li>
+            <li>Test Requierements: {{ seattest.test_requirements }}</li>
+            <li>Allowable Leak Rate (cm3/min): {{ seattest.allowable_leak_rate }}</li>
+            <li>Seat A Recorded Leak Rate (cm3/min): {{ seattest.seat_a_rlr }}</li>
+            <li>Seat B Recorded Leak Rate (cm3/min): {{ seattest.seat_b_rlr }}</li>
+            <li>Seat C Recorded Leak Rate (cm3/min): {{ seattest.seat_c_rlr }}</li>
+            <li>Seat D Recorded Leak Rate (cm3/min): {{ seattest.seat_d_rlr }}</li>
+            <li>Test Date: {{ seattest.test_date }}</li>
+            <li>Test Result: {{ seattest.test_result }}</li>
+            <li>Comments: {{ seattest.comments }}</li>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="card" id="div2">
+        <div class="card-header">
+            <h4> Shell Tests </h4>
+        </div>
+        <div class="card-body">
+            Final Result always on top
+            {% for shelltest in shelltests %}
+            <h4 class="card-title">{{ shelltest.test_date }}: {{ shelltest.test_result }}</h4>
+            <p class="card-text">        
+            <li>ID: {{ shelltest.shelltest_id }}</li>
+            <li>Serial Number: {{ shelltest.serial_number }}</li>
+            <li>Test Medium: {{ shelltest.test_medium }}</li>
+            <li>Test Pressure: {{ shelltest.test_pressure }}</li>
+            <li>Test Duration (Min): {{ shelltest.test_duration }}</li>
+            <li>Gauge SN: {{ shelltest.gauge_serial_number }}</li>
+            <li>Test Requierements: {{ shelltest.test_requirements }}</li>
+            <li>Allowable Leak Rate (cm3/min): {{ shelltest.allowable_leak_rate }}</li>
+            <li>Recorded Leak Rate (cm3/min): {{ shelltest.recorded_leak_rate }}</li>
+            <li>Test Date: {{ shelltest.test_date }}</li>
+            <li>Test Result: {{ shelltest.test_result }}</li>
+            <li>Comments: {{ shelltest.comments }}</li>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="card" id="div3" >
+        <div class="card-header">
+            <h4>BackSeat Tests</h4>
+            <h4></h4>
+        </div>
+        <div class="card-body">
+            Final Result always on top
+            {% for backseattest in backseattests %}
+            <h4 class="card-title">{{ backseattest.test_date }}: {{ backseattest.test_result }}</h4>
+            <p class="card-text">        
+            <li>ID: {{ backseattest.backseattest_id }}</li>
+            <li>Serial Number: {{ backseattest.serial_number }}</li>
+            <li>Test Medium: {{ backseattest.test_medium }}</li>
+            <li>Test Pressure: {{ backseattest.test_pressure }}</li>
+            <li>Test Duration (Min): {{ backseattest.test_duration }}</li>
+            <li>Gauge SN: {{ backseattest.gauge_serial_number }}</li>
+            <li>Test Requierements: {{ backseattest.test_requirements }}</li>
+            <li>Allowable Leak Rate (cm3/min): {{ backseattest.allowable_leak_rate }}</li>
+            <li>Recorded Leak Rate (cm3/min): {{ backseattest.recorded_leak_rate }}</li>
+            <li>Test Date: {{ backseattest.test_date }}</li>
+            <li>Test Result: {{ backseattest.test_result }}</li>
+            <li>Comments: {{ backseattest.comments }}</li>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+
+
+
+
+
+<style>
+
+
+
+    #div1 {
+    width: 30%;
+    float: left;
+    background-color:bg-light;
+    border-radius: 15px;
+    padding: 8px;
+  }
+
+    #div2 {
+    width: 30%;
+    float: left;
+    background-color:bg-light;
+    border-radius: 15px;
+    padding: 8px;
+  }
+
+    #div3 {
+    width: 30%;
+    float: left;
+    background-color:bg-light;
+    border-radius: 15px;
+    padding: 8px;
+  }
+    
+    body { width: 1400px; margin: 0 auto; 
+      font-size:90%;
+    }
+    
+    
+              /* Add some styles to the header */
+              header {
+        background-color: #F0F0F0;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+
+    .card {
+
+        margin: 5px;
+
+    }
+
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+
+
+    
+    </style>
+    
+    
+</html>
+{% endblock %}
+    
+    
+    
+    
+    
+    
+
