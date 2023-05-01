@@ -1,2 +1,2 @@
-web:gunicorn data-management-project.web --log-file -
+web:gunicorn data-management-project.wsgi --log-file -
 worker: ./bin/icka -forever
