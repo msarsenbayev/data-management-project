@@ -12,7 +12,3 @@
     ]
 }
 
-
-{ "rewrites": [{ "source": "/(.*)", "destination": "/" }] }
-
-#comment
