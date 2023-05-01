@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 Django settings for data_management_project project.
 
