@@ -41,9 +41,9 @@ STATICFILES_DIRS = [
     #BASE_DIR / 'static'
 ]
 
-STATIC_ROOT=os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT=os.path.join(BASE_DIR, "static")
 
-ALLOWED_HOSTS = ['127.0.0.1:8000', 'data-management-project.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'data-management-project.herokuapp.com']
 
 
 # Application definition
