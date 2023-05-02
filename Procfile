@@ -1,1 +1,1 @@
-waitress-serve --listen=*:8000 data-management-project.wsgi:application
+web: gunicorn data-management-project.wsgi:application
