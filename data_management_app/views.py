@@ -40,6 +40,10 @@ def login_page(request):
 def main_page(request):
 	return render(request, 'main_page.html')
 
+@login_required(login_url='login_page')
+def dashboard(request):
+	return render(request, 'dashboard.html')
+
 
 @login_required(login_url='login_page')
 def charts(request):
@@ -382,20 +386,17 @@ def submitted_valvedetails(request):
     return render(request, 'submitted_valvedetails.html')
 
 
-# @login_required(login_url='login_page')
-# def submitted_valvetesting(request):
-#     valve_testing = SeatTest.objects.all()
-#     return render(request, 'submitted_valvetesting.html', {'valve_testing': valve_testing})
+@login_required(login_url='login_page')
+def submitted_valvetesting(request):
+    return render(request, 'submitted_valvetesting.html')
 
-# @login_required(login_url='login_page')
-# def submitted_valveinspection(request):
-#     valve_inspection = ValveInspection.objects.all()
-#     return render(request, 'submitted_valveinspection.html', {'valve_inspection': valve_inspection})
+@login_required(login_url='login_page')
+def submitted_valveinspection(request):
+    return render(request, 'submitted_valveinspection.html')
 
-# @login_required(login_url='login_page')
-# def submitted_valvepreservation(request):
-#     valve_preservation = ValvePreservation.objects.all()
-#     return render(request, 'submitted_valvepreservation.html', {'valve_preservation': valve_preservation})
+@login_required(login_url='login_page')
+def submitted_valvepreservation(request):
+    return render(request, 'submitted_valvepreservation.html')
 
 @method_decorator(login_required(login_url='login_page'), name='dispatch')
 class submitted_valvepreservation(SingleTableView):
