@@ -43,7 +43,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 
 #ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = [os.environ['data-management-project.azurewebsites.net']] if 'data-management-project.azurewebsites.net' in os.environ else []
+ALLOWED_HOSTS = [os.environ['data-management-project_azurewebsites.net']] if 'data-management-project_azurewebsites.net' in os.environ else []
 
 # Application definition
 
