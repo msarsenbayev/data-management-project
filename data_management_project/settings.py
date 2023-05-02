@@ -40,7 +40,7 @@ STATICFILES_DIRS = [
     #BASE_DIR / 'static'
 ]
 
-STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 
 #ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
