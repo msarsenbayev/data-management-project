@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django_filters',
     'django_bootstrap5',
     'widget_tweaks',
+    'whitenoise.runserver_nostatic',
     #'floppyforms',
 ]
 
