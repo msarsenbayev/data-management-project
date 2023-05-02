@@ -1,4 +1,3 @@
-
 """
 Django settings for data_management_project project.
 
@@ -10,11 +9,6 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
-import dj_database_url
-import os
-from django.test.runner import DiscoverRunner
-from pathlib import Path
 
 from pathlib import Path
 import os
@@ -36,8 +30,6 @@ DEBUG = False
 
 import os
 
-IS_HEROKU = "DYNO" in os.environ
-
 MEDIA_URL="/media/"
 MEDIA_ROOT=os.path.join(BASE_DIR,"media")
 
@@ -48,9 +40,9 @@ STATICFILES_DIRS = [
     #BASE_DIR / 'static'
 ]
 
-STATIC_ROOT=os.path.join(BASE_DIR, "static")
+STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 
-ALLOWED_HOSTS = [os.environ['data-management-project.azurewebsites.net']] if 'data-management-project.azurewebsites.net' in os.environ else []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -67,13 +59,11 @@ INSTALLED_APPS = [
     'django_filters',
     'django_bootstrap5',
     'widget_tweaks',
-    'whitenoise.runserver_nostatic',
     #'floppyforms',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -108,34 +98,24 @@ WSGI_APPLICATION = 'data_management_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
-#    'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'postgres',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Qazanbasbala#1',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
-MAX_CONN_AGE = 600
+DATABASES = {
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'Qazanbasbala#1',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
-if "DATABASE_URL" in os.environ:
-    # Configure Django for DATABASE_URL environment variable.
-    DATABASES["default"] = dj_database_url.config(
-        conn_max_age=MAX_CONN_AGE, ssl_require=True)
-
-    # Enable test database if found in CI environment.
-    if "CI" in os.environ:
-        DATABASES["default"]["TEST"] = DATABASES["default"]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -201,5 +181,5 @@ MESSAGE_TAGS = {
         messages.ERROR: 'alert-danger',
  }
 
-
 #test
+#test1
