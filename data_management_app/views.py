@@ -175,23 +175,30 @@ def charts(request):
 		total_soft = ValveDetails.objects.filter(valve_seat_type='SOFT').count()
 		total_metal = ValveDetails.objects.filter(valve_seat_type='METAL').count()
 
+		from django.db.models import Max
 		#SEAT TESTS
-		unique_seattests = SeatTest.objects.all().distinct('serial_number').order_by('serial_number','-seattest_id')
+		#unique_seattests = SeatTest.objects.all().distinct('serial_number').order_by('serial_number','-seattest_id')
+		unique_seattests = (
+			SeatTest.objects
+			.values('serial_number')
+			.annotate(max_seattest_id=Max('seattest_id'))
+			.order_by('serial_number', '-max_seattest_id')
+)
 		seat_tests = unique_seattests.filter(serial_number__isnull=False).count()
 		seattest_pass = unique_seattests.filter(test_result='PASS').count()
 		seattest_fail = seat_tests - seattest_pass
 
-		#SHELL TESTS
-		unique_shelltests = ShellTest.objects.all().distinct('serial_number').order_by('serial_number','-shelltest_id')
-		shell_tests = unique_shelltests.filter(serial_number__isnull=False).count()
-		shelltest_pass = unique_shelltests.filter(test_result='PASS').count()
-		shelltest_fail = shell_tests - shelltest_pass
+		# #SHELL TESTS
+		# unique_shelltests = ShellTest.objects.all().distinct('serial_number').order_by('serial_number','-shelltest_id')
+		# shell_tests = unique_shelltests.filter(serial_number__isnull=False).count()
+		# shelltest_pass = unique_shelltests.filter(test_result='PASS').count()
+		# shelltest_fail = shell_tests - shelltest_pass
 
-		#BACKSEAT TESTS
-		unique_backseattests = BackSeatTest.objects.all().distinct('serial_number').order_by('serial_number','-backseattest_id')
-		backseat_tests = unique_backseattests.filter(serial_number__isnull=False).count()
-		backseat_pass = unique_backseattests.filter(test_result='PASS').count()
-		backseat_fail = backseat_tests - backseat_pass
+		# #BACKSEAT TESTS
+		# unique_backseattests = BackSeatTest.objects.all().distinct('serial_number').order_by('serial_number','-backseattest_id')
+		# backseat_tests = unique_backseattests.filter(serial_number__isnull=False).count()
+		# backseat_pass = unique_backseattests.filter(test_result='PASS').count()
+		# backseat_fail = backseat_tests - backseat_pass
 	
 
 		context = {
@@ -216,12 +223,12 @@ def charts(request):
 			'seat_tests': seat_tests,
 			'seattest_pass': seattest_pass,
 			'seattest_fail':seattest_fail,
-			'shell_tests': shell_tests,
-			'shelltest_pass':shelltest_pass,
-			'shelltest_fail':shelltest_fail,
-			'backseat_tests':backseat_tests,
-			'backseat_pass':backseat_pass,
-			'backseat_fail':backseat_fail,
+			# 'shell_tests': shell_tests,
+			# 'shelltest_pass':shelltest_pass,
+			# 'shelltest_fail':shelltest_fail,
+			# 'backseat_tests':backseat_tests,
+			# 'backseat_pass':backseat_pass,
+			# 'backseat_fail':backseat_fail,
 
 
 		}
