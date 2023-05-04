@@ -623,7 +623,6 @@ def update_valve_info(request, valvedetails_id):
 			return redirect("valvedetails_filter")
 		return render(request, 'update_valvedetails.html', { "valve_info": valve_info, "form": form})
 
-
 def view_valve_info(request, valvedetails_id):
 		view_valvedetails = ValveDetails.objects.get(pk=valvedetails_id)
 		seattests = view_valvedetails.seattest_set.all().order_by('-seattest_id')
