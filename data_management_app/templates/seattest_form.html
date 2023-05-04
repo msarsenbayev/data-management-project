@@ -99,11 +99,11 @@
         <form action="{% url 'submit_seattest' %}" method=POST enctype="multipart/form-data">
           {% csrf_token %}
           
-          <label for="ice-cream-choice">Serial Number:</label>
+          <!-- <label for="ice-cream-choice">Serial Number:</label>
           <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice">
           <datalist id="ice-cream-flavors">
               <option value = "{{ form.serial_number }}">
-          </datalist>
+          </datalist> -->
 
           {{ form.as_p }}
     
