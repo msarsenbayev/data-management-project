@@ -291,7 +291,23 @@ class uniqueseattesttable(SingleTableView):
 		#distinct_seattests = SeatTest.objects.all().distinct('serial_number').order_by('serial_number','-seattest_id')
 		distinct_seattests = (
 			SeatTest.objects
-			.values('serial_number')
+			.values(
+			    'seattest_id',
+				'serial_number',
+				'test_medium',
+				'test_pressure' ,
+				'test_duration',
+				'gauge_serial_number',
+				'test_requirements',
+				'allowable_leak_rate',
+				'seat_a_rlr',
+				'seat_b_rlr',
+				'seat_c_rlr', 
+				'seat_d_rlr',
+				'test_date', 
+				'test_result',
+				'comments',
+			)
 			.annotate(max_seattest_id=Max('seattest_id'))
 			.order_by('serial_number', '-max_seattest_id')
 			)
@@ -613,6 +629,17 @@ def handle_logout(request):
 		messages.success(request, ("You Were Logged Out!"))
 		return redirect('login_page')
 
+def delete_seattest(request, seattest_id):
+		delete_valve = SeatTest.objects.get(pk=seattest_id)
+		delete_valve.delete()
+		messages.success(request, "Successfully deleted")
+		return redirect("valve_testing")
+
+def delete_valve_info(request, valvedetails_id):
+		delete_valve = ValveDetails.objects.get(pk=valvedetails_id)
+		delete_valve.delete()
+		messages.success(request, "Successfully deleted")
+		return redirect("valvedetails_filter")
 
 def update_valve_info(request, valvedetails_id):
 		valve_info = ValveDetails.objects.get(pk=valvedetails_id)

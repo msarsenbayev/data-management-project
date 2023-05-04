@@ -29,11 +29,13 @@ urlpatterns = [
     #path('submit_valvetestingfacttable/', handle_form_valvetestingfacttable, name='submit_valvetestingfacttable'),
 
     path('update_valvedetails.html/<valvedetails_id>', views.update_valve_info, name='update_valve_info'),
+    path('delete_valve_info/<valvedetails_id>', views.delete_valve_info, name='delete_valve_info'),
+    path('delete_seattest/<seattest_id>', views.delete_seattest, name='delete_seattest'),
     path('total_valve_info.html/<valvedetails_id>', views.view_valve_info, name='view_valve_info'),
     #path('total_valve_info.html/<valvedetails_id>', views.view_seattests, name='view_seattests'),
     
     path('dashboard.html/', views.charts, name="dashboard"),
-    path('submitted_seattesting.html/', views.seattesttable.as_view(), name="seattests"),
+    path('submitted_seattesting.html/', views.seattesttable.as_view(), name="submitted_seattesting"),
     path('submitted_shelltesting.html/', views.shelltesttable.as_view(), name="shelltests"),
     path('submitted_backseattesting.html/', views.backseattesttable.as_view(), name="backseattests"),
     path('submitted_valvereceipt.html/', views.valvereceipttable.as_view(), name="valvereceipttable"),

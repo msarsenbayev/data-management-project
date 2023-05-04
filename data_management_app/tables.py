@@ -25,6 +25,9 @@ class ValveDetailsTable(tables.Table):
 	update = tables.LinkColumn('update_valve_info', args=[A('pk')], orderable=False, empty_values=())
 	def render_update(self):
 		return 'Update'
+	delete = tables.LinkColumn('delete_valve_info', args=[A('pk')], orderable=False, empty_values=())
+	def render_delete(self):
+		return 'Delete'
 
 	class Meta:
 		model = ValveDetails
@@ -33,6 +36,9 @@ class ValveDetailsTable(tables.Table):
 
 
 class SeatTestTable(tables.Table):
+	delete = tables.LinkColumn('delete_seattest', args=[A('pk')], orderable=False, empty_values=())
+	def render_delete(self):
+		return 'Delete'
 
 	class Meta:
 		model = SeatTest
