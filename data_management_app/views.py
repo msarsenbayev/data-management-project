@@ -25,6 +25,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from .serializers import *
 from django.db.models import Q
+from django.db.models import Max
 
 #from django.views.decorators.cache import cache_control
 
@@ -175,7 +176,7 @@ def charts(request):
 		total_soft = ValveDetails.objects.filter(valve_seat_type='SOFT').count()
 		total_metal = ValveDetails.objects.filter(valve_seat_type='METAL').count()
 
-		from django.db.models import Max
+		
 		#SEAT TESTS
 		#unique_seattests = SeatTest.objects.all().distinct('serial_number').order_by('serial_number','-seattest_id')
 		unique_seattests = (
@@ -284,11 +285,17 @@ class FilteredSeatTestView(SingleTableMixin, FilterView):
 
 @method_decorator(login_required(login_url='login_page'), name='dispatch')
 class uniqueseattesttable(SingleTableView):
-    model = SeatTest
-    template_name = "distinct_seattests.html"
-    def get_queryset(self):
-        distinct_seattests = SeatTest.objects.all().distinct('serial_number').order_by('serial_number','-seattest_id')#SeatTest.objects.distinct('serial_number')
-        return distinct_seattests
+	model = SeatTest
+	template_name = "distinct_seattests.html"
+	def get_queryset(self):
+		#distinct_seattests = SeatTest.objects.all().distinct('serial_number').order_by('serial_number','-seattest_id')
+		distinct_seattests = (
+			SeatTest.objects
+			.values('serial_number')
+			.annotate(max_seattest_id=Max('seattest_id'))
+			.order_by('serial_number', '-max_seattest_id')
+			)
+		return distinct_seattests
 
 
 @method_decorator(login_required(login_url='login_page'), name='dispatch')
