@@ -1,10 +1,15 @@
 import pandas as pd
 import sqlite3
-from data_management_app.models import *
+from django.core.management.base import BaseCommand
+# from data_management_app.models import *
 
-conn = sqlite3.connect('db.sqlite3')
+class Command(BaseCommand):
+    help = 'import data from csv file'
 
-data = "valve_data.csv"
+    def handle(self, *args, **options):
 
-df = pd.read_csv(data)
-df.to_sql(ValveDetails._meta.db_table, conn, if_exists='append', index=False)
+        data = "valve_data.csv"
+        df = pd.read_csv(data)
+        df.columns=df.columns.str.strip()
+        conn = sqlite3.connect('db.sqlite3')
+        df.to_sql('data_management_app_valvedetails', conn, if_exists='append', index=False)

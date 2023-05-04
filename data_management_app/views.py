@@ -193,8 +193,9 @@ def charts(request):
 		unique_shelltests = (
 			ShellTest.objects
 			.values('serial_number')
-			.annotate(max_shelltest_id=Max('shelltesttest_id'))
-			.order_by('serial_number', '-max_shelltesttest_id')
+			.annotate(max_shelltest_id=Max('shelltest_id'))
+			.order_by('serial_number', '-max_shelltest_id')
+		)
 		shell_tests = unique_shelltests.filter(serial_number__isnull=False).count()
 		shelltest_pass = unique_shelltests.filter(test_result='PASS').count()
 		shelltest_fail = shell_tests - shelltest_pass
@@ -205,7 +206,7 @@ def charts(request):
 			BackSeatTest.objects
 			.values('serial_number')
 			.annotate(max_backseattest_id=Max('backseattest_id'))
-			.order_by('serial_number', '-max_backseattest_id')		
+			.order_by('serial_number', '-max_backseattest_id')	)	
 		backseat_tests = unique_backseattests.filter(serial_number__isnull=False).count()
 		backseat_pass = unique_backseattests.filter(test_result='PASS').count()
 		backseat_fail = backseat_tests - backseat_pass
@@ -233,12 +234,12 @@ def charts(request):
 			'seat_tests': seat_tests,
 			'seattest_pass': seattest_pass,
 			'seattest_fail':seattest_fail,
-			# 'shell_tests': shell_tests,
-			# 'shelltest_pass':shelltest_pass,
-			# 'shelltest_fail':shelltest_fail,
-			# 'backseat_tests':backseat_tests,
-			# 'backseat_pass':backseat_pass,
-			# 'backseat_fail':backseat_fail,
+			'shell_tests': shell_tests,
+			'shelltest_pass':shelltest_pass,
+			'shelltest_fail':shelltest_fail,
+			'backseat_tests':backseat_tests,
+			'backseat_pass':backseat_pass,
+			'backseat_fail':backseat_fail,
 
 
 		}
