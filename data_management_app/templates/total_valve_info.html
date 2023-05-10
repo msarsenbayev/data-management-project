@@ -64,6 +64,64 @@
     </div>
     </div>
 
+    <div >  
+      <div class="card" id="div01">
+          <div class="card-header">
+              <h4> Receipt </h4>
+          </div>
+          <div class="card-body">
+            {% for receipts in receipt %}
+            <p class="card-text">        
+            <li>Receipt date: {{ receipts.received_date }}</li>
+            <li>Comments: {{ receipts.comments }}</li>
+            {% endfor %}
+          </div>
+      </div>
+
+      <div class="card" id="div02">
+        <div class="card-header">
+            <h4> Inspection </h4>
+        </div>
+        <div class="card-body">
+            {% for inspections in inspection %}
+            <h4 class="card-title"></h4>
+            <p class="card-text">        
+            <li>Inspected Date: {{ inspections.inspected_date }}</li>
+            <li>Inspection Codes: {{ inspections.inspection_codes }}</li>
+            <li>Comments: {{ inspections.issues_identified }}</li>
+            {% endfor %}
+        </div>
+      </div>
+      <div class="card" id="div03">
+        <div class="card-header">
+            <h4> Preservation </h4>
+        </div>
+        <div class="card-body">
+            {% for preservations in preservation %}
+            <h4 class="card-title"></h4>
+            <p class="card-text">        
+            <li>Preservation Date: {{ preservations.preservation_date }}</li>
+            <li>Preservation Codes: {{ preservations.preservation_codes }}</li>
+            <li>Comments: {{ preservations.comments }}</li>
+            {% endfor %}
+        </div>
+      </div>
+      <div class="card" id="div04">
+        <div class="card-header">
+            <h4> Dispatch </h4>
+        </div>
+        <div class="card-body">
+            {% for dispatches in dispatch %}
+            <h4 class="card-title"></h4>
+            <p class="card-text">        
+            <li>Dispatch Date: {{ dispatches.dispatch_date }}</li>
+            <li>Comments: {{ dispatches.comments }}</li>
+            {% endfor %}
+        </div>
+      </div>
+</div>
+
+
 
 <div >  
     <div class="card" id="div1">
@@ -224,6 +282,38 @@
     background-color: #f5f5f5;
   }
 
+
+  #div01 {
+    width: 24%;
+    float: left;
+    background-color:bg-light;
+    border-radius: 15px;
+    padding: 8px;
+  }
+
+    #div02 {
+    width: 24%;
+    float: left;
+    background-color:bg-light;
+    border-radius: 15px;
+    padding: 8px;
+  }
+
+    #div03 {
+    width: 24%;
+    float: left;
+    background-color:bg-light;
+    border-radius: 15px;
+    padding: 8px;
+  }
+
+  #div04 {
+    width: 24%;
+    float: left;
+    background-color:bg-light;
+    border-radius: 15px;
+    padding: 8px;
+  }
 
     
     </style>

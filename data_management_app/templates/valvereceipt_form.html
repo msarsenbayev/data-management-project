@@ -80,6 +80,8 @@
         }
 
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+
   </head>
  
   <body>
@@ -89,9 +91,7 @@
         <p>        </p>
         <div>
           <div>
-            {% for message in messages %}
-            <p class="text-danger">{{message}}</p>
-            {% endfor %}
+            {% include 'messages.html' %}
           </div>
         </div>
 

@@ -411,15 +411,13 @@ def valve_testing(request):
 
 @login_required(login_url='login_page')
 def valve_inspection(request):
-	return render(request, 'valve_inspection.html')
+	form = ValveInspectionForm
+	return render(request, 'valve_inspection.html', {"form": form})
 
 @login_required(login_url='login_page')
 def valve_preservation(request):
-	return render(request, 'valve_preservation.html')
-
-@login_required(login_url='login_page')
-def valve_preservation(request):
-	return render(request, 'valve_preservation.html')
+	form = ValvePreservationForm
+	return render(request, 'valve_preservation.html', {"form": form})
 
 
 @login_required(login_url='login_page')
@@ -441,7 +439,7 @@ def submitted_valvepreservation(request):
 
 @method_decorator(login_required(login_url='login_page'), name='dispatch')
 class submitted_valvepreservation(SingleTableView):
-	model = ValveDispatch
+	model = ValvePreservation
 	table_class = ValvePreservationTable
 	paginate_by = 20
 	template_name = "submitted_valvepreservation.html"
@@ -570,39 +568,33 @@ def handle_form_valvedispatch(request):
 
 def handle_form_valveinspection(request):
 	if request.method == 'POST':
-		valveinspection = ValveInspection(
-			valve_serial_number = request.POST.get('Valve Serial Number'),
-			inspection_codes = request.POST.get('Inspection Codes'),
-			inspected_date = request.POST.get('Inspected Date'),
-			inspected_by = request.POST.get('Inspected By'),
-			issues_identified = request.POST.get('Issues Identified'),
-		)
-		valveinspection.save()
-		# Do something with the form data here
-		return render(request, 'handle_form_submission.html', {'valveinspection': valveinspection})
+		form = ValveInspectionForm(request.POST)
+		if form.is_valid():
+			valveinspection = form.save()
+			valveinspection.save()
+			# Do something with the form data here	
+			messages.success(request, "Successfully submitted")
+			return redirect('valve_inspection')
+		else:
+			messages.warning(request, "Please enter correct data")
+			return redirect('valve_inspection')
 	else:
-		return render(request, 'handle_form_submission.html')
+		return render(request, 'handle_form_submission.html', {'valveinspection': valveinspection})
 	
 
 def handle_form_valvepreservation(request):
-	#valvepreservation = None  # initialize to None
 	if request.method == 'POST':
-			valvepreservation = ValvePreservation(
-			valve_serial_number = request.POST.get('Valve Serial Number'),
-			preservation_codes = request.POST.get('Preservation Codes'),
-			preservation_date = request.POST.get('Preservation Date'),
-			preservation_by = request.POST.get('Preservation By'),
-			comments = request.POST.get('Comments'),
-			)
-			if len(valvepreservation.valve_serial_number)!="" and valvepreservation.preservation_codes!="":
-				valvepreservation.save()
-				messages.success(request, "Successfully submitted")
-				return redirect('valve_preservation')
-			else:
-				messages.warning(request, "Please enter correct data")
-				return redirect('valve_preservation')
+		form = ValvePreservationForm(request.POST)
+		if form.is_valid():
+			valvepreservation = form.save()
+			valvepreservation.save()
+			messages.success(request, "Successfully submitted")
+			return redirect('valve_preservation')
+		else:
+			messages.warning(request, "Please enter correct data")
+			return redirect('valve_preservation')
 	else:
-		return render(request, 'valve_preservation.html')
+		return render(request, 'valve_preservation.html', {'valvepreservation': valvepreservation})
 	
 
 
@@ -655,11 +647,20 @@ def view_valve_info(request, valvedetails_id):
 		seattests = view_valvedetails.seattest_set.all().order_by('-seattest_id')
 		shelltests = view_valvedetails.shelltest_set.all().order_by('-shelltest_id')
 		backseattests = view_valvedetails.backseattest_set.all().order_by('-backseattest_id')
+		receipt = view_valvedetails.valvereceipt_set.all().order_by('-valvereceipt_id')
+		dispatch = view_valvedetails.valvedispatch_set.all().order_by('-valvedispatch_id')
+		inspection = view_valvedetails.valveinspection_set.all().order_by('-valveinspection_id')
+		preservation = view_valvedetails.valvepreservation_set.all().order_by('-valvepreservation_id')
 		context = {
 				"view_valvedetails": view_valvedetails,
 				'seattests':seattests,
 				'shelltests':shelltests,
 				'backseattests':backseattests,
+				'receipt': receipt,
+				'dispatch': dispatch,
+				'inspection': inspection,
+				'preservation': preservation,
+
 			}
 		if seattests:
 			return render(request, 'total_valve_info.html', context)

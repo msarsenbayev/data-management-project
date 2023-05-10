@@ -12,11 +12,17 @@ class ValveDispatchForm(ModelForm):
 	class Meta:
 		model = ValveDispatch
 		fields = '__all__'
+		widgets = {
+            'dispatch_date': DateInput(),
+        }
 
 class ValveReceiptForm(ModelForm): 
 	class Meta:
 		model = ValveReceipt
 		fields = '__all__'
+		widgets = {
+            'received_date': DateInput(),
+        }
 
 class ShellTestForm(ModelForm): 
 	class Meta:
@@ -42,7 +48,21 @@ class SeatTestForm(ModelForm):
             'test_date': DateInput(),
         }
 
+class ValveInspectionForm(ModelForm): 
+	class Meta:
+		model = ValveInspection
+		fields = '__all__'
+		widgets = {
+            'inspected_date': DateInput(),
+        }
 
+class ValvePreservationForm(ModelForm): 
+	class Meta:
+		model = ValvePreservation
+		fields = '__all__'
+		widgets = {
+            'preservation_date': DateInput(),
+        }
 
 # class ValveTestingFactTableForm(ModelForm): 
 # 	class Meta:
