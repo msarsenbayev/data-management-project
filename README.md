@@ -4,3 +4,7 @@ Check out my full-stack application development project https://data-management-
 Username: staff
 
 Password: examplepasswordforstaff
+
+
+
+NOTE: It may take extra couple of seconds to load first time.
