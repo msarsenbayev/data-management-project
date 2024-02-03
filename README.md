@@ -7,4 +7,4 @@ Password: examplepasswordforstaff
 
 
 
-NOTE: It may take extra couple of seconds to load first time.
+NOTE: Currently app is down. Azure is getting expensive.
